@@ -66,6 +66,12 @@ public class MetaHandler extends CompletableHandler<List<MetaHandler.GameVersion
 	public static class GameVersion {
 		String version;
 		boolean stable;
+		
+		GameVersion() { }
+		GameVersion(String version, boolean stable) {
+			this.version = version;
+			this.stable = stable;
+		}
 
 		public String getVersion() {
 			return version;

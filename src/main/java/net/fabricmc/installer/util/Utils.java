@@ -110,9 +110,7 @@ public class Utils {
 	}
 
 	public static MinecraftLaunchJson getLaunchMeta(String loaderVersion) throws IOException {
-		String url = String.format("%s/%s/%s/%s/%3$s-%4$s.json", Reference.mavenServerUrl, Reference.PACKAGE, Reference.LOADER_NAME, loaderVersion);
-		String fabricInstallMeta = Utils.readTextFile(new URL(url));
-		JsonObject installMeta = Utils.GSON.fromJson(fabricInstallMeta, JsonObject.class);
+		JsonObject installMeta = Utils.GSON.fromJson(new InputStreamReader(Utils.class.getClassLoader().getResourceAsStream("launchmeta.json")), JsonObject.class);
 		return new MinecraftLaunchJson(installMeta);
 	}
 

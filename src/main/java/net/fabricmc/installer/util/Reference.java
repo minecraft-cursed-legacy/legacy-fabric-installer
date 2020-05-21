@@ -17,9 +17,9 @@
 package net.fabricmc.installer.util;
 
 public class Reference {
-	public static final String PACKAGE = "net/fabricmc";
-	public static final String LOADER_NAME = "fabric-loader";
-	public static final String MAPPINGS_NAME = "intermediary";
+	public static final String PACKAGE = "com/github/minecraft-cursed-legacy";
+	public static final String LOADER_NAME = "cursed-fabric-loader";
+	public static final String MAPPINGS_NAME = "Plasma";
 
-	public static String mavenServerUrl = "https://maven.fabricmc.net/";
+	public static String mavenServerUrl = "https://jitpack.io/";
 }
