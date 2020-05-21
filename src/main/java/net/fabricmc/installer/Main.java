@@ -20,8 +20,10 @@ import net.fabricmc.installer.client.ClientHandler;
 import net.fabricmc.installer.server.ServerHandler;
 import net.fabricmc.installer.util.ArgumentParser;
 import net.fabricmc.installer.util.CrashDialog;
+import net.fabricmc.installer.util.HardcodedMetaHandler;
 import net.fabricmc.installer.util.MetaHandler;
 import net.fabricmc.installer.util.Reference;
+import net.fabricmc.installer.util.MetaHandler.GameVersion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,8 +72,8 @@ public class Main {
 		argumentParser.ifPresent("mavenurl", s -> Reference.mavenServerUrl = s);
 		final String metaUrl = argumentParser.getOrDefault("metaurl", () -> "https://meta.fabricmc.net/");
 
-		GAME_VERSION_META = new MetaHandler(metaUrl + "v2/versions/game");
-		LOADER_META = new MetaHandler(metaUrl + "v2/versions/loader");
+		GAME_VERSION_META = new HardcodedMetaHandler().addVersion("b1.7.3", true);
+		LOADER_META = new HardcodedMetaHandler().addVersion("392aab7", true);
 
 		//Default to the help command in a headless environment
 		if(GraphicsEnvironment.isHeadless() && command == null){

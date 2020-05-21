@@ -61,7 +61,7 @@ public class ServerInstaller {
 
 		//We add fabric-loader as a lib so it can be downloaded and loaded in the same way as the other libs
 		meta.libraries.add(new MinecraftLaunchJson.Library("net.fabricmc:fabric-loader:" + loaderVersion, Reference.mavenServerUrl));
-		meta.libraries.add(new MinecraftLaunchJson.Library(Reference.PACKAGE.replaceAll("/", ".") + ":" + Reference.MAPPINGS_NAME + ":" + gameVersion, Reference.mavenServerUrl));
+		meta.libraries.add(new MinecraftLaunchJson.Library("com.github.minecraft-cursed-legacy:Plasma:build.9", Reference.mavenServerUrl));
 
 		List<File> libraryFiles = new ArrayList<>();
 
