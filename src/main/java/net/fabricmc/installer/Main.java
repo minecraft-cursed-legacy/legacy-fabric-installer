@@ -73,7 +73,7 @@ public class Main {
 		final String metaUrl = argumentParser.getOrDefault("metaurl", () -> "https://meta.fabricmc.net/");
 
 		GAME_VERSION_META = new HardcodedMetaHandler().addVersion("b1.7.3", true);
-		LOADER_META = new HardcodedMetaHandler().addVersion("392aab7", true);
+		LOADER_META = new HardcodedMetaHandler().addVersion("8f014a3", true);
 
 		//Default to the help command in a headless environment
 		if(GraphicsEnvironment.isHeadless() && command == null){
