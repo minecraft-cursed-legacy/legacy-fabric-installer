@@ -16,17 +16,7 @@
 
 package net.fabricmc.installer;
 
-import net.fabricmc.installer.client.ClientHandler;
-import net.fabricmc.installer.server.ServerHandler;
-import net.fabricmc.installer.util.ArgumentParser;
-import net.fabricmc.installer.util.CrashDialog;
-import net.fabricmc.installer.util.HardcodedMetaHandler;
-import net.fabricmc.installer.util.MetaHandler;
-import net.fabricmc.installer.util.Reference;
-import net.fabricmc.installer.util.MetaHandler.GameVersion;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +24,17 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
+import io.github.minecraftcursedlegacy.installer.VersionData;
+import net.fabricmc.installer.client.ClientHandler;
+import net.fabricmc.installer.server.ServerHandler;
+import net.fabricmc.installer.util.ArgumentParser;
+import net.fabricmc.installer.util.CrashDialog;
+import net.fabricmc.installer.util.HardcodedMetaHandler;
+import net.fabricmc.installer.util.MetaHandler;
+import net.fabricmc.installer.util.Reference;
 
 public class Main {
 
@@ -73,7 +74,7 @@ public class Main {
 		final String metaUrl = argumentParser.getOrDefault("metaurl", () -> "https://meta.fabricmc.net/");
 
 		GAME_VERSION_META = new HardcodedMetaHandler().addVersion("b1.7.3", true);
-		LOADER_META = new HardcodedMetaHandler().addVersion("8f014a3", true);
+		LOADER_META = new HardcodedMetaHandler().addVersion(VersionData.LOADER_VERSION, true);
 
 		//Default to the help command in a headless environment
 		if(GraphicsEnvironment.isHeadless() && command == null){
