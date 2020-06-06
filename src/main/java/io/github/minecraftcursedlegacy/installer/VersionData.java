@@ -17,5 +17,5 @@
 package io.github.minecraftcursedlegacy.installer;
 
 public final class VersionData {
-	public static final String LOADER_VERSION = "8f014a3";
+	public static final String LOADER_VERSION = "093a1e4";
 }
