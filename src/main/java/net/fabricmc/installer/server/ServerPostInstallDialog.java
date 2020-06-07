@@ -16,14 +16,20 @@
 
 package net.fabricmc.installer.server;
 
-import com.google.gson.JsonObject;
-import net.fabricmc.installer.InstallerGui;
-import net.fabricmc.installer.util.LauncherMeta;
-import net.fabricmc.installer.util.Utils;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -33,8 +39,24 @@ import java.util.function.Consumer;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class ServerPostInstallDialog extends JDialog {
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
+import com.google.gson.JsonObject;
+
+import net.fabricmc.installer.InstallerGui;
+import net.fabricmc.installer.util.LauncherMeta;
+import net.fabricmc.installer.util.Utils;
+
+public class ServerPostInstallDialog extends JDialog {
 	private static final int MB = 1000000;
 
 	private JPanel panel = new JPanel();

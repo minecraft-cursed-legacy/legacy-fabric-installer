@@ -16,16 +16,26 @@
 
 package net.fabricmc.installer;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.io.IOException;
+import java.util.function.Consumer;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+
 import net.fabricmc.installer.util.ArgumentParser;
 import net.fabricmc.installer.util.InstallerProgress;
 import net.fabricmc.installer.util.MetaHandler;
 import net.fabricmc.installer.util.Utils;
-
-import javax.swing.*;
-import javax.xml.stream.XMLStreamException;
-import java.awt.*;
-import java.io.IOException;
-import java.util.function.Consumer;
 
 public abstract class Handler implements InstallerProgress {
 
