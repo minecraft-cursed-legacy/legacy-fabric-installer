@@ -22,4 +22,5 @@ public class Reference {
 	public static final String MAPPINGS_NAME = "Plasma";
 
 	public static String mavenServerUrl = "https://jitpack.io/";
+	public static String modmussServerUrl = "http://maven.modmuss50.me/";
 }
