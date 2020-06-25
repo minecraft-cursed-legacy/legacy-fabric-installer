@@ -25,6 +25,7 @@ import java.awt.Toolkit;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -118,7 +119,35 @@ public class ServerPostInstallDialog extends JDialog {
 	}
 
 	private boolean isValidJarPresent() {
-		return minecraftJar.exists();
+		if (!minecraftJar.exists()) {
+			return false;
+		}
+		try {
+			InputStream fis = new FileInputStream(minecraftJar);
+
+			byte[] buffer = new byte[1024];
+			MessageDigest complete = MessageDigest.getInstance("MD5");
+			int numRead;
+
+			do {
+				numRead = fis.read(buffer);
+				if (numRead > 0) {
+					complete.update(buffer, 0, numRead);
+				}
+			} while (numRead != -1);
+
+			fis.close();
+
+			byte[] b = complete.digest();
+			StringBuilder result = new StringBuilder();
+
+			for (byte value : b) {
+				result.append(Integer.toString((value & 0xff) + 0x100, 16).substring(1));
+			}
+			return result.toString().equals(VersionData.SERVER_MD5);
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	private void updateServerJarLabel() {
