@@ -16,17 +16,6 @@
 
 package net.fabricmc.installer;
 
-import java.awt.GraphicsEnvironment;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
-import javax.swing.JOptionPane;
-
 import io.github.minecraftcursedlegacy.installer.VersionData;
 import net.fabricmc.installer.client.ClientHandler;
 import net.fabricmc.installer.server.ServerHandler;
@@ -35,6 +24,16 @@ import net.fabricmc.installer.util.CrashDialog;
 import net.fabricmc.installer.util.HardcodedMetaHandler;
 import net.fabricmc.installer.util.MetaHandler;
 import net.fabricmc.installer.util.Reference;
+
+import javax.swing.JOptionPane;
+import java.awt.GraphicsEnvironment;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class Main {
 

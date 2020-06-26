@@ -16,22 +16,9 @@
 
 package net.fabricmc.installer.server;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.HeadlessException;
-import java.awt.Toolkit;
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.MessageDigest;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
+import io.github.minecraftcursedlegacy.installer.VersionData;
+import net.fabricmc.installer.InstallerGui;
+import net.fabricmc.installer.util.Utils;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -43,13 +30,28 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import com.google.gson.JsonObject;
-
-import io.github.minecraftcursedlegacy.installer.VersionData;
-import net.fabricmc.installer.InstallerGui;
-import net.fabricmc.installer.util.LauncherMeta;
-import net.fabricmc.installer.util.Utils;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class ServerPostInstallDialog extends JDialog {
 	private static final int MB = 1000000;

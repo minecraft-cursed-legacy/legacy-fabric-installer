@@ -22,7 +22,8 @@ import net.fabricmc.installer.util.ArgumentParser;
 import net.fabricmc.installer.util.InstallerProgress;
 import net.fabricmc.installer.util.Utils;
 
-import javax.swing.*;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.MessageFormat;

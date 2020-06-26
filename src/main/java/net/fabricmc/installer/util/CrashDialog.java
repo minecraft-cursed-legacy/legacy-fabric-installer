@@ -16,8 +16,12 @@
 
 package net.fabricmc.installer.util;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
