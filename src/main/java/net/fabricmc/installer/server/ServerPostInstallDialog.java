@@ -16,28 +16,9 @@
 
 package net.fabricmc.installer.server;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.HeadlessException;
-import java.awt.Toolkit;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
+import io.github.minecraftcursedlegacy.installer.VersionData;
+import net.fabricmc.installer.InstallerGui;
+import net.fabricmc.installer.util.Utils;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -49,12 +30,28 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import com.google.gson.JsonObject;
-
-import net.fabricmc.installer.InstallerGui;
-import net.fabricmc.installer.util.LauncherMeta;
-import net.fabricmc.installer.util.Utils;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class ServerPostInstallDialog extends JDialog {
 	private static final int MB = 1000000;
@@ -75,7 +72,7 @@ public class ServerPostInstallDialog extends JDialog {
 		this.serverHandler = handler;
 		this.minecraftVersion = (String) handler.gameVersionComboBox.getSelectedItem();
 		this.installDir = new File(handler.installLocation.getText());
-		this.minecraftJar = new File(installDir, "server.jar");
+		this.minecraftJar = new File(installDir, minecraftVersion + ".jar");
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		initComponents();
@@ -127,15 +124,30 @@ public class ServerPostInstallDialog extends JDialog {
 		if (!minecraftJar.exists()) {
 			return false;
 		}
-		try (JarFile jarFile = new JarFile(minecraftJar)) {
-			JarEntry versionEntry = jarFile.getJarEntry("version.json");
-			if (versionEntry == null) {
-				return false;
+		try {
+			InputStream fis = new FileInputStream(minecraftJar);
+
+			byte[] buffer = new byte[1024];
+			MessageDigest complete = MessageDigest.getInstance("MD5");
+			int numRead;
+
+			do {
+				numRead = fis.read(buffer);
+				if (numRead > 0) {
+					complete.update(buffer, 0, numRead);
+				}
+			} while (numRead != -1);
+
+			fis.close();
+
+			byte[] b = complete.digest();
+			StringBuilder result = new StringBuilder();
+
+			for (byte value : b) {
+				result.append(Integer.toString((value & 0xff) + 0x100, 16).substring(1));
 			}
-			InputStream inputStream = jarFile.getInputStream(versionEntry);
-			JsonObject jsonObject = Utils.GSON.fromJson(new InputStreamReader(inputStream), JsonObject.class);
-			return jsonObject.get("id").getAsString().equals(minecraftVersion) || jsonObject.get("name").getAsString().equals(minecraftVersion);
-		} catch (IOException e) {
+			return result.toString().equals(VersionData.SERVER_MD5);
+		} catch (Exception e) {
 			return false;
 		}
 	}
@@ -160,7 +172,7 @@ public class ServerPostInstallDialog extends JDialog {
 		}
 		new Thread(() -> {
 			try {
-				URL url = new URL(LauncherMeta.getLauncherMeta().getVersion(minecraftVersion).getVersionMeta().downloads.get("server").url);
+				URL url = new URL(VersionData.SERVER_URL);
 				HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
 				int finalSize = httpConnection.getContentLength();
 
@@ -182,6 +194,10 @@ public class ServerPostInstallDialog extends JDialog {
 				}
 				bufferedOutputStream.close();
 				inputStream.close();
+
+				try (PrintWriter out = new PrintWriter(new File(installDir, "fabric-server-launcher.properties"))) {
+					out.println("serverJar=" + minecraftVersion + ".jar");
+				}
 
 				updateServerJarLabel();
 				downloadButton.setEnabled(true);

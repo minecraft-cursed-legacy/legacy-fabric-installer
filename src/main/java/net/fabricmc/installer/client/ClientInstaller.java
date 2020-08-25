@@ -16,13 +16,13 @@
 
 package net.fabricmc.installer.client;
 
-import java.io.File;
-import java.io.IOException;
-
 import net.fabricmc.installer.util.InstallerProgress;
 import net.fabricmc.installer.util.MinecraftLaunchJson;
 import net.fabricmc.installer.util.Reference;
 import net.fabricmc.installer.util.Utils;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ClientInstaller {
 

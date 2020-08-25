@@ -16,7 +16,10 @@
 
 package net.fabricmc.installer.server;
 
-import net.fabricmc.installer.util.*;
+import net.fabricmc.installer.util.InstallerProgress;
+import net.fabricmc.installer.util.MinecraftLaunchJson;
+import net.fabricmc.installer.util.Reference;
+import net.fabricmc.installer.util.Utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,7 +34,14 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
@@ -60,8 +70,9 @@ public class ServerInstaller {
 		MinecraftLaunchJson meta = Utils.getLaunchMeta(loaderVersion);
 
 		//We add fabric-loader as a lib so it can be downloaded and loaded in the same way as the other libs
-		meta.libraries.add(new MinecraftLaunchJson.Library("net.fabricmc:fabric-loader:" + loaderVersion, Reference.mavenServerUrl));
 		meta.libraries.add(new MinecraftLaunchJson.Library("com.github.minecraft-cursed-legacy:Plasma:build.9", Reference.mavenServerUrl));
+		meta.libraries.add(new MinecraftLaunchJson.Library("tk.valoeghese:ZoesteriaConfig:1.3.4", Reference.modmussServerUrl));
+		meta.libraries.add(new MinecraftLaunchJson.Library(Reference.PACKAGE.replaceAll("/", ".") + ":" + Reference.LOADER_NAME + ":" + loaderVersion, Reference.mavenServerUrl));
 
 		List<File> libraryFiles = new ArrayList<>();
 
