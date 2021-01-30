@@ -16,7 +16,7 @@
 
 package io.github.minecraftcursedlegacy.installer;
 
-public final class VersionData {
-	public static final String SERVER_URL = "https://files.pymcl.net/server/vanilla/bin/Beta%201.7.3.jar";
-	public static final String SERVER_MD5 = "cc263aa969f2d8621c5443a5a18897e2";
+import java.util.ArrayList;
+
+public class GithubCommitArrayList extends ArrayList<GithubCommit> {
 }

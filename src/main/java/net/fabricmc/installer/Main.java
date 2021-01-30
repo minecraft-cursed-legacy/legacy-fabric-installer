@@ -16,7 +16,8 @@
 
 package net.fabricmc.installer;
 
-import io.github.minecraftcursedlegacy.installer.VersionData;
+import io.github.minecraftcursedlegacy.installer.GithubCommit;
+import io.github.minecraftcursedlegacy.installer.GithubCommitArrayList;
 import net.fabricmc.installer.client.ClientHandler;
 import net.fabricmc.installer.server.ServerHandler;
 import net.fabricmc.installer.util.ArgumentParser;
@@ -29,6 +30,7 @@ import javax.swing.JOptionPane;
 import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -73,7 +75,11 @@ public class Main {
 		final String metaUrl = argumentParser.getOrDefault("metaurl", () -> "https://meta.fabricmc.net/");
 
 		GAME_VERSION_META = new HardcodedMetaHandler().addVersion("b1.7.3", true);
-		LOADER_META = new HardcodedMetaHandler().addVersion(VersionData.LOADER_VERSION, true);
+		HardcodedMetaHandler metaHandler = new HardcodedMetaHandler();
+		GithubCommitArrayList commits = GithubCommit.getCommits();
+		Collections.reverse(commits);
+		commits.forEach(githubCommit -> metaHandler.addVersion(githubCommit.sha.substring(0, 7), true));
+		LOADER_META = metaHandler;
 
 		//Default to the help command in a headless environment
 		if(GraphicsEnvironment.isHeadless() && command == null){
