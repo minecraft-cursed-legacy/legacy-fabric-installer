@@ -17,7 +17,6 @@
 package net.fabricmc.installer;
 
 import io.github.minecraftcursedlegacy.installer.GithubCommit;
-import io.github.minecraftcursedlegacy.installer.GithubCommitArrayList;
 import net.fabricmc.installer.client.ClientHandler;
 import net.fabricmc.installer.server.ServerHandler;
 import net.fabricmc.installer.util.ArgumentParser;
@@ -76,7 +75,7 @@ public class Main {
 
 		GAME_VERSION_META = new HardcodedMetaHandler().addVersion("b1.7.3", true);
 		HardcodedMetaHandler metaHandler = new HardcodedMetaHandler();
-		GithubCommitArrayList commits = GithubCommit.getCommits();
+		List<GithubCommit> commits = GithubCommit.getCommits();
 		Collections.reverse(commits);
 		commits.forEach(githubCommit -> metaHandler.addVersion(githubCommit.sha.substring(0, 7), true));
 		LOADER_META = metaHandler;

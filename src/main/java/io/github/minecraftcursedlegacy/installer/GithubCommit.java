@@ -18,11 +18,13 @@ package io.github.minecraftcursedlegacy.installer;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 
 public class GithubCommit {
 
@@ -31,14 +33,14 @@ public class GithubCommit {
     @SerializedName("html_url")
     public String htmlUrl;
 
-    public static GithubCommitArrayList getCommits() throws IOException {
-        GithubCommitArrayList versions;
+    public static List<GithubCommit> getCommits() throws IOException {
+        List<GithubCommit> versions;
         Gson gson = new Gson();
 
         URL githubURL = new URL("https://api.github.com/repos/minecraft-cursed-legacy/Cursed-fabric-loader/commits");
         InputStream githubStream = githubURL.openStream();
 
-        versions = gson.fromJson(new InputStreamReader(githubStream), GithubCommitArrayList.class);
+        versions = gson.fromJson(new InputStreamReader(githubStream), new TypeToken<List<GithubCommit>>() {}.getType());
 
         return versions;
     }
