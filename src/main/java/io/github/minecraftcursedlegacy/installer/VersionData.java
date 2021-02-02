@@ -17,7 +17,6 @@
 package io.github.minecraftcursedlegacy.installer;
 
 public final class VersionData {
-	public static final String LOADER_VERSION = "453b245";
 	public static final String SERVER_URL = "https://files.pymcl.net/server/vanilla/bin/Beta%201.7.3.jar";
 	public static final String SERVER_MD5 = "cc263aa969f2d8621c5443a5a18897e2";
 }

@@ -16,6 +16,7 @@
 
 package net.fabricmc.installer;
 
+import io.github.minecraftcursedlegacy.installer.VersionData;
 import net.fabricmc.installer.util.Utils;
 
 import javax.swing.JFileChooser;
