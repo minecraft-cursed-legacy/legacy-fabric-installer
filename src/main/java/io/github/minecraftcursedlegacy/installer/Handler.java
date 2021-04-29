@@ -22,6 +22,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -96,7 +97,7 @@ public abstract class Handler implements InstallerProgress {
 
 		addRow(pane, jPanel -> {
 			JPanel centre = new JPanel(new FlowLayout());
-			jPanel.setPreferredSize(new Dimension(480, 35));
+			jPanel.setPreferredSize(new Dimension(500, 35));
 
 			centre.add(gameVersionComboBox = new JComboBox<>());
 			centre.add(buttonInstall = new JButton(Utils.BUNDLE.getString("prompt.install")));
@@ -108,7 +109,9 @@ public abstract class Handler implements InstallerProgress {
 			jPanel.add(centre, BorderLayout.CENTER);
 
 			try {
-				JButton button = new JButton("", new ImageIcon(Utils.getNestedImage("options.png")));
+				JButton button = new JButton("", new ImageIcon(
+						Utils.getNestedImage("options.png").getScaledInstance(30, 30, Image.SCALE_SMOOTH)
+						));
 				button.setOpaque(false);
 				button.setContentAreaFilled(false);
 				button.setBorderPainted(false);
@@ -126,7 +129,7 @@ public abstract class Handler implements InstallerProgress {
 			}
 		}, new BorderLayout());
 
-		extraOptions.setPreferredSize(new Dimension(480, 100));
+		extraOptions.setPreferredSize(new Dimension(500, 100));
 		pane.add(extraOptions);
 
 		return pane;
