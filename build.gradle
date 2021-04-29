@@ -40,11 +40,13 @@ repositories {
 
 dependencies {
 	compile 'com.google.code.gson:gson:2.8.5'
+	implementation 'com.formdev:flatlaf:1.0'
 	testCompile 'junit:junit:4.12'
 }
 
 shadowJar {
 	relocate 'com.google', 'io.github.minecraftcursedlegacy.installer.repackage.com.google'
+	relocate 'com.formdev.flatlaf', 'io.github.minecraftcursedlegacy.installer.repackage.com.formdev.flatlaf'
 	minimize()
 	classifier = null
 }

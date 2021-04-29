@@ -16,23 +16,23 @@
 
 package io.github.minecraftcursedlegacy.installer;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.WindowConstants;
-import javax.xml.stream.XMLStreamException;
-
-import io.github.minecraftcursedlegacy.installer.util.Utils;
-import io.github.minecraftcursedlegacy.installer.util.data.VersionData;
-
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
+import javax.xml.stream.XMLStreamException;
+
+import com.formdev.flatlaf.FlatLightLaf;
+
+import io.github.minecraftcursedlegacy.installer.util.Utils;
 
 public class InstallerGui extends JFrame {
 	public static InstallerGui instance;
@@ -64,7 +64,7 @@ public class InstallerGui extends JFrame {
 
 	public static void start() throws IOException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, XMLStreamException {
 		//This will make people happy
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		FlatLightLaf.install();
 		InstallerGui dialog = new InstallerGui();
 		instance = dialog;
 		dialog.pack();
