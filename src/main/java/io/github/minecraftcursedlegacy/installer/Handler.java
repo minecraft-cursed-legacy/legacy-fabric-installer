@@ -23,6 +23,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.LayoutManager;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -51,6 +53,7 @@ public abstract class Handler implements InstallerProgress {
 	public JTextField installLocation;
 	public JButton selectFolderButton;
 	public JLabel statusLabel;
+	private JPanel extraOptions;
 
 	private JPanel pane;
 
@@ -89,7 +92,7 @@ public abstract class Handler implements InstallerProgress {
 		});
 
 		// Initialise here so button can access it
-		JPanel extraOptions = makeExtraOptionsPanel(installerGui);
+		extraOptions = makeExtraOptionsPanel(installerGui);
 		extraOptions.setVisible(false);
 
 		addRow(pane, jPanel -> {
@@ -106,7 +109,6 @@ public abstract class Handler implements InstallerProgress {
 			jPanel.add(centre, BorderLayout.CENTER);
 
 			try {
-				// Alignment Hack
 				JButton button = new JButton("", new ImageIcon(Utils.getNestedImage("options.png")));
 				button.setOpaque(false);
 				button.setContentAreaFilled(false);
@@ -129,6 +131,10 @@ public abstract class Handler implements InstallerProgress {
 		pane.add(extraOptions);
 
 		return pane;
+	}
+
+	public final void hideOptions() {
+		extraOptions.setVisible(false);
 	}
 
 	private JPanel makeExtraOptionsPanel(InstallerGui installerGui) {

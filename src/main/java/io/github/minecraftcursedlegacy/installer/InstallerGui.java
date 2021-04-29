@@ -16,6 +16,7 @@
 
 package io.github.minecraftcursedlegacy.installer;
 
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
@@ -76,5 +77,10 @@ public class InstallerGui extends JFrame {
 	private void initComponents() {
 		contentPane = new JTabbedPane(JTabbedPane.TOP);
 		Main.HANDLERS.forEach(handler -> contentPane.addTab(Utils.BUNDLE.getString("tab." + handler.name().toLowerCase(Locale.ROOT)), handler.makePanel(this)));
+
+		contentPane.addChangeListener(l -> {
+			Main.HANDLERS.forEach(handler -> handler.hideOptions());
+			this.pack();
+		});
 	}
 }
