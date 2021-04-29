@@ -57,6 +57,11 @@ public class MinecraftLaunchJson {
 
 		arguments.game.add("--assetDir");
 		arguments.game.add("${game_assets}");
+		
+		// Because mojang args handling is bad
+		arguments.jvm.add("-cp");
+		arguments.jvm.add("${classpath}");
+		arguments.jvm.add("-Djava.library.path=${natives_directory}");
 
 		String[] validSides = new String[]{"common", "server"};
 		JsonObject librariesObject = jsonObject.getAsJsonObject("libraries");
@@ -108,7 +113,7 @@ public class MinecraftLaunchJson {
 	}
 
 	public static class Arguments {
-
 		public List<String> game = new ArrayList<>();
+		public List<String> jvm = new ArrayList<>();
 	}
 }

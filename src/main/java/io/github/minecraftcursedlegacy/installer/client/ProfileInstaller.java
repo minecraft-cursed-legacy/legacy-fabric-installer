@@ -43,8 +43,10 @@ public class ProfileInstaller {
 
 		JsonObject profile;
 		if (profiles.has(profileName)) {
+			System.out.println("Already has Profile.");
 			profile = profiles.get(profileName).getAsJsonObject();
 		} else {
+			System.out.println("Installing Profile.");
 			profile = createProfile(profileName);
 		}
 

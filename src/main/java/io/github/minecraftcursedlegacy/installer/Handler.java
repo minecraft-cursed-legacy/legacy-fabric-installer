@@ -83,7 +83,7 @@ public abstract class Handler implements InstallerProgress {
 			welcome.setFont(new Font(welcome.getFont().getName(), Font.BOLD, 24));
 
 			jPanel.add(welcome);
-		}, new FlowLayout(FlowLayout.CENTER, 10, 5));
+		}, new FlowLayout(FlowLayout.CENTER, 35, 5));
 
 		addRow(pane, jPanel -> {
 			jPanel.add(statusLabel = new JLabel());
