@@ -19,6 +19,7 @@ package io.github.minecraftcursedlegacy.installer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.LayoutManager;
@@ -93,6 +94,7 @@ public abstract class Handler implements InstallerProgress {
 
 		addRow(pane, jPanel -> {
 			JPanel centre = new JPanel(new FlowLayout());
+			jPanel.setPreferredSize(new Dimension(480, 35));
 
 			centre.add(gameVersionComboBox = new JComboBox<>());
 			centre.add(buttonInstall = new JButton(Utils.BUNDLE.getString("prompt.install")));
@@ -110,7 +112,7 @@ public abstract class Handler implements InstallerProgress {
 				button.setContentAreaFilled(false);
 				button.setBorderPainted(false);
 				button.setPreferredSize(new java.awt.Dimension(30, 30));
-				
+
 				button.addActionListener(e -> {
 					extraOptions.setVisible(!extraOptions.isVisible());
 					installerGui.pack();
@@ -123,6 +125,7 @@ public abstract class Handler implements InstallerProgress {
 			}
 		}, new BorderLayout());
 
+		extraOptions.setPreferredSize(new Dimension(480, 100));
 		pane.add(extraOptions);
 
 		return pane;

@@ -78,7 +78,7 @@ public class Main {
 		HardcodedMetaHandler metaHandler = new HardcodedMetaHandler();
 		List<GithubCommit> commits = GithubCommit.getCommits();
 		Collections.reverse(commits);
-		commits.forEach(githubCommit -> metaHandler.addVersion(githubCommit.sha.substring(0, 7), true));
+		commits.forEach(githubCommit -> metaHandler.addVersion(githubCommit.commit.author.date.substring(0, 10) + " [" + githubCommit.sha.substring(0, 7) + "]", true));
 		LOADER_META = metaHandler;
 
 		//Default to the help command in a headless environment
