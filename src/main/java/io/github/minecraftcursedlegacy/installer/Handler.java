@@ -21,9 +21,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -107,6 +104,7 @@ public abstract class Handler implements InstallerProgress {
 			jPanel.add(centre, BorderLayout.CENTER);
 
 			try {
+				// Alignment Hack
 				JButton button = new JButton("", new ImageIcon(Utils.getNestedImage("options.png")));
 				button.setOpaque(false);
 				button.setContentAreaFilled(false);
@@ -115,7 +113,7 @@ public abstract class Handler implements InstallerProgress {
 				
 				button.addActionListener(e -> {
 					extraOptions.setVisible(!extraOptions.isVisible());
-					installerGui.revalidate();
+					installerGui.pack();
 				});
 
 				jPanel.add(button, BorderLayout.EAST);
