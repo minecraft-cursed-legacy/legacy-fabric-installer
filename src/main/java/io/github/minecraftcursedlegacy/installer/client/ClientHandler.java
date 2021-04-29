@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.client;
-
-import net.fabricmc.installer.Handler;
-import net.fabricmc.installer.InstallerGui;
-import net.fabricmc.installer.util.ArgumentParser;
-import net.fabricmc.installer.util.InstallerProgress;
-import net.fabricmc.installer.util.Utils;
+package io.github.minecraftcursedlegacy.installer.client;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+
+import io.github.minecraftcursedlegacy.installer.Handler;
+import io.github.minecraftcursedlegacy.installer.InstallerGui;
+import io.github.minecraftcursedlegacy.installer.util.ArgumentParser;
+import io.github.minecraftcursedlegacy.installer.util.InstallerProgress;
+import io.github.minecraftcursedlegacy.installer.util.Utils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.MessageFormat;

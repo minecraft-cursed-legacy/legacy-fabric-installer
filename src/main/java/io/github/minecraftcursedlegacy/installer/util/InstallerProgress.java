@@ -14,9 +14,24 @@
  * limitations under the License.
  */
 
-package io.github.minecraftcursedlegacy.installer;
+package io.github.minecraftcursedlegacy.installer.util;
 
-public final class VersionData {
-	public static final String SERVER_URL = "https://files.pymcl.net/server/vanilla/bin/Beta%201.7.3.jar";
-	public static final String SERVER_MD5 = "cc263aa969f2d8621c5443a5a18897e2";
+public interface InstallerProgress {
+
+	InstallerProgress CONSOLE = new InstallerProgress() {
+		@Override
+		public void updateProgress(String text) {
+			System.out.println(text);
+		}
+
+		@Override
+		public void error(Exception error) {
+			throw new RuntimeException(error);
+		}
+	};
+
+	void updateProgress(String text);
+
+	void error(Exception error);
+
 }

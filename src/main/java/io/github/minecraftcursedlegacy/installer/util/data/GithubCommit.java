@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.minecraftcursedlegacy.installer;
+package io.github.minecraftcursedlegacy.installer.util.data;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;

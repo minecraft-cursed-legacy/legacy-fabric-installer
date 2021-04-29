@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.util;
+package io.github.minecraftcursedlegacy.installer.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

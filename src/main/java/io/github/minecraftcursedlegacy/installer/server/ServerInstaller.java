@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.server;
-
-import net.fabricmc.installer.util.InstallerProgress;
-import net.fabricmc.installer.util.MinecraftLaunchJson;
-import net.fabricmc.installer.util.Reference;
-import net.fabricmc.installer.util.Utils;
+package io.github.minecraftcursedlegacy.installer.server;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -48,6 +43,11 @@ import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import io.github.minecraftcursedlegacy.installer.util.InstallerProgress;
+import io.github.minecraftcursedlegacy.installer.util.MinecraftLaunchJson;
+import io.github.minecraftcursedlegacy.installer.util.Utils;
+import io.github.minecraftcursedlegacy.installer.util.data.Reference;
 
 public class ServerInstaller {
 	private static final String servicesDir = "META-INF/services/";

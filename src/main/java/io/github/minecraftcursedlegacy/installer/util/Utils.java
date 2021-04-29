@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.util;
+package io.github.minecraftcursedlegacy.installer.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

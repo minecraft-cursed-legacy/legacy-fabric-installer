@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.util;
+package io.github.minecraftcursedlegacy.installer.util;
 
-public interface InstallerProgress {
+import java.util.Map;
 
-	InstallerProgress CONSOLE = new InstallerProgress() {
-		@Override
-		public void updateProgress(String text) {
-			System.out.println(text);
-		}
+public class VersionMeta {
 
-		@Override
-		public void error(Exception error) {
-			throw new RuntimeException(error);
-		}
-	};
+	public String id;
+	public Map<String, Download> downloads;
 
-	void updateProgress(String text);
+	public static class Download {
+		public String sha1;
+		public long size;
+		public String url;
+	}
 
-	void error(Exception error);
 
 }

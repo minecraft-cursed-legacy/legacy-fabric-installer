@@ -16,9 +16,10 @@
 
 package net.fabricmc.installer.test;
 
-import net.fabricmc.installer.util.ArgumentParser;
 import org.junit.Assert;
 import org.junit.Test;
+
+import io.github.minecraftcursedlegacy.installer.util.ArgumentParser;
 
 public class ArgumentTests {
 

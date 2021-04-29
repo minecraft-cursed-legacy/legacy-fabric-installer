@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.util;
+package io.github.minecraftcursedlegacy.installer.util.data;
 
 public class Reference {
 	public static final String PACKAGE = "com/github/minecraft-cursed-legacy";

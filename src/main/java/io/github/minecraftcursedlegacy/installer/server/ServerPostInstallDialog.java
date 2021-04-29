@@ -14,11 +14,7 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.server;
-
-import io.github.minecraftcursedlegacy.installer.VersionData;
-import net.fabricmc.installer.InstallerGui;
-import net.fabricmc.installer.util.Utils;
+package io.github.minecraftcursedlegacy.installer.server;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -30,6 +26,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import io.github.minecraftcursedlegacy.installer.InstallerGui;
+import io.github.minecraftcursedlegacy.installer.util.Utils;
+import io.github.minecraftcursedlegacy.installer.util.data.VersionData;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;

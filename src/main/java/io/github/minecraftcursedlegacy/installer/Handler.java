@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer;
-
-import net.fabricmc.installer.util.ArgumentParser;
-import net.fabricmc.installer.util.InstallerProgress;
-import net.fabricmc.installer.util.MetaHandler;
-import net.fabricmc.installer.util.Utils;
+package io.github.minecraftcursedlegacy.installer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -30,6 +25,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+
+import io.github.minecraftcursedlegacy.installer.util.ArgumentParser;
+import io.github.minecraftcursedlegacy.installer.util.InstallerProgress;
+import io.github.minecraftcursedlegacy.installer.util.MetaHandler;
+import io.github.minecraftcursedlegacy.installer.util.Utils;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;

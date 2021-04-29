@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.client;
+package io.github.minecraftcursedlegacy.installer.client;
 
 import com.google.gson.JsonObject;
-import net.fabricmc.installer.util.Reference;
-import net.fabricmc.installer.util.Utils;
+
+import io.github.minecraftcursedlegacy.installer.util.Utils;
+import io.github.minecraftcursedlegacy.installer.util.data.Reference;
 
 import java.io.File;
 import java.io.IOException;

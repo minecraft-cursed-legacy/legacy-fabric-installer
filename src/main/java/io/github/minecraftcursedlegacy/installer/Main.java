@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer;
-
-import io.github.minecraftcursedlegacy.installer.GithubCommit;
-import net.fabricmc.installer.client.ClientHandler;
-import net.fabricmc.installer.server.ServerHandler;
-import net.fabricmc.installer.util.ArgumentParser;
-import net.fabricmc.installer.util.CrashDialog;
-import net.fabricmc.installer.util.HardcodedMetaHandler;
-import net.fabricmc.installer.util.MetaHandler;
-import net.fabricmc.installer.util.Reference;
+package io.github.minecraftcursedlegacy.installer;
 
 import javax.swing.JOptionPane;
+
+import io.github.minecraftcursedlegacy.installer.client.ClientHandler;
+import io.github.minecraftcursedlegacy.installer.server.ServerHandler;
+import io.github.minecraftcursedlegacy.installer.util.ArgumentParser;
+import io.github.minecraftcursedlegacy.installer.util.CrashDialog;
+import io.github.minecraftcursedlegacy.installer.util.HardcodedMetaHandler;
+import io.github.minecraftcursedlegacy.installer.util.MetaHandler;
+import io.github.minecraftcursedlegacy.installer.util.data.GithubCommit;
+import io.github.minecraftcursedlegacy.installer.util.data.Reference;
+
 import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 import java.util.ArrayList;

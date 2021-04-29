@@ -14,29 +14,9 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.util;
+package io.github.minecraftcursedlegacy.installer.util.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-
-public class CompletableHandler<T> {
-
-	private boolean complete;
-
-	private List<Consumer<T>> completeConsumers = new ArrayList<>();
-
-	public void onComplete(Consumer<T> completeConsumer) {
-		completeConsumers.add(completeConsumer);
-	}
-
-	protected void complete(T value){
-		complete = true;
-		completeConsumers.forEach(listConsumer -> listConsumer.accept(value));
-	}
-
-	public boolean isComplete() {
-		return complete;
-	}
-
+public final class VersionData {
+	public static final String SERVER_URL = "https://files.pymcl.net/server/vanilla/bin/Beta%201.7.3.jar";
+	public static final String SERVER_MD5 = "cc263aa969f2d8621c5443a5a18897e2";
 }

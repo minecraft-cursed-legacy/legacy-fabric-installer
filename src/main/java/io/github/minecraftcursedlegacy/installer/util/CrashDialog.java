@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.util;
+package io.github.minecraftcursedlegacy.installer.util;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;

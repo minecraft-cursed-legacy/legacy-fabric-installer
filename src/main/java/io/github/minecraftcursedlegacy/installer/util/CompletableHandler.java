@@ -14,20 +14,29 @@
  * limitations under the License.
  */
 
-package net.fabricmc.installer.util;
+package io.github.minecraftcursedlegacy.installer.util;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
-public class VersionMeta {
+public class CompletableHandler<T> {
 
-	public String id;
-	public Map<String, Download> downloads;
+	private boolean complete;
 
-	public static class Download {
-		public String sha1;
-		public long size;
-		public String url;
+	private List<Consumer<T>> completeConsumers = new ArrayList<>();
+
+	public void onComplete(Consumer<T> completeConsumer) {
+		completeConsumers.add(completeConsumer);
 	}
 
+	protected void complete(T value){
+		complete = true;
+		completeConsumers.forEach(listConsumer -> listConsumer.accept(value));
+	}
+
+	public boolean isComplete() {
+		return complete;
+	}
 
 }

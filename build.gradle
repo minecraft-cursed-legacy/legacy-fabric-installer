@@ -44,7 +44,7 @@ dependencies {
 }
 
 shadowJar {
-	relocate 'com.google', 'net.fabricmc.installer.repackage.com.google'
+	relocate 'com.google', 'io.github.minecraftcursedlegacy.installer.repackage.com.google'
 	minimize()
 	classifier = null
 }
@@ -56,13 +56,13 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'FabricInstaller',
                 'Implementation-Version': version,
-                'Main-Class': 'net.fabricmc.installer.Main'
+                'Main-Class': 'io.github.minecraftcursedlegacy.installer.Main'
     }
 	enabled = false
 }
 
 launch4j {
-    mainClassName = 'net.fabricmc.installer.Main'
+    mainClassName = 'io.github.minecraftcursedlegacy.installer.Main'
     icon = "${projectDir}/src/main/resources/icon.ico"
 	outfile = "${archivesBaseName}-${project.version}.exe"
 	productName = 'Fabric installer'
