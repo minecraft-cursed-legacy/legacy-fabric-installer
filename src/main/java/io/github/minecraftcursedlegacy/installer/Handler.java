@@ -16,26 +16,33 @@
 
 package io.github.minecraftcursedlegacy.installer;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.io.IOException;
+import java.util.function.Consumer;
+
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import io.github.minecraftcursedlegacy.installer.util.ArgumentParser;
 import io.github.minecraftcursedlegacy.installer.util.InstallerProgress;
 import io.github.minecraftcursedlegacy.installer.util.MetaHandler;
 import io.github.minecraftcursedlegacy.installer.util.Utils;
-
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.io.IOException;
-import java.util.function.Consumer;
 
 public abstract class Handler implements InstallerProgress {
 
@@ -46,8 +53,6 @@ public abstract class Handler implements InstallerProgress {
 	public JTextField installLocation;
 	public JButton selectFolderButton;
 	public JLabel statusLabel;
-
-	public JCheckBox snapshotCheckBox;
 
 	private JPanel pane;
 
@@ -60,38 +65,94 @@ public abstract class Handler implements InstallerProgress {
 	public abstract String cliHelp();
 
 	//this isnt great, but works
-	public abstract void setupPane1(JPanel pane, InstallerGui installerGui);
 
-	public abstract void setupPane2(JPanel pane, InstallerGui installerGui);
+	public abstract void setupSidedOptions(JPanel pane, InstallerGui installerGui);
 
 	public JPanel makePanel(InstallerGui installerGui) {
 		pane = new JPanel();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
 
-		setupPane1(pane, installerGui);
+		addRow(pane, jPanel -> {
+			try {
+				jPanel.add(new JLabel(new ImageIcon(Utils.getNestedImage("profile_icon.png"))));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			JLabel welcome = new JLabel("<html><div style='text-align: center;'>" + Utils.BUNDLE.getString("installer.welcome") + "</div></html>");
+			welcome.setFont(new Font(welcome.getFont().getName(), Font.BOLD, 24));
+
+			jPanel.add(welcome);
+		}, new FlowLayout(FlowLayout.CENTER, 10, 5));
 
 		addRow(pane, jPanel -> {
-			jPanel.add(new JLabel(Utils.BUNDLE.getString("prompt.game.version")));
-			jPanel.add(gameVersionComboBox = new JComboBox<>());
-			jPanel.add(snapshotCheckBox = new JCheckBox(Utils.BUNDLE.getString("option.show.snapshots")));
-			snapshotCheckBox.setSelected(false);
-			snapshotCheckBox.addActionListener(e -> {
-				if (Main.GAME_VERSION_META.isComplete()) {
-					updateGameVersions();
-				}
-			});
+			jPanel.add(statusLabel = new JLabel());
+			statusLabel.setText(Utils.BUNDLE.getString("prompt.loading.versions"));
 		});
+
+		addRow(pane, jPanel -> {
+			GridBagConstraints constraints = new GridBagConstraints();
+			constraints.fill = GridBagConstraints.NONE;
+			constraints.gridx = 1;
+			constraints.gridy = 0;
+			constraints.weightx = 0;
+			constraints.ipadx = -40;
+
+			JPanel centre = new JPanel(new FlowLayout());
+
+			centre.add(gameVersionComboBox = new JComboBox<>());
+			centre.add(buttonInstall = new JButton(Utils.BUNDLE.getString("prompt.install")));
+			buttonInstall.addActionListener(e -> {
+				buttonInstall.setEnabled(false);
+				install();
+			});
+			buttonInstall.setSize(buttonInstall.getWidth(), buttonInstall.getHeight() * 5);
+
+			jPanel.add(centre, constraints);
+
+			try {
+				JButton button = new JButton("", new ImageIcon(Utils.getNestedImage("options.png")));
+				button.setOpaque(false);
+				button.setContentAreaFilled(false);
+				button.setBorderPainted(false);
+				button.setPreferredSize(new java.awt.Dimension(30, 30));
+
+				constraints.fill = GridBagConstraints.NONE;
+				constraints.gridx = 2;
+				constraints.weightx = 1.0;
+				constraints.gridy = 0;
+				constraints.ipadx = 0;
+				constraints.anchor = GridBagConstraints.LINE_END;
+
+				jPanel.add(button, constraints);
+				button.setAlignmentX(SwingConstants.RIGHT);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}, new GridBagLayout());
+
+		JPanel extraOptions = makeExtraOptionsPanel(installerGui);
+
+		pane.add(extraOptions);
+
+		return pane;
+	}
+
+	private JPanel makeExtraOptionsPanel(InstallerGui installerGui) {
+		JPanel extraOptions = new JPanel();
+
+		extraOptions.setLayout(new BoxLayout(extraOptions, BoxLayout.PAGE_AXIS));
 
 		Main.GAME_VERSION_META.onComplete(versions -> {
 			updateGameVersions();
 		});
 
-		addRow(pane, jPanel -> {
+		addRow(extraOptions, jPanel -> {
 			jPanel.add(new JLabel(Utils.BUNDLE.getString("prompt.loader.version")));
 			jPanel.add(loaderVersionComboBox = new JComboBox<>());
 		});
 
-		addRow(pane, jPanel -> {
+		addRow(extraOptions, jPanel -> {
 			jPanel.add(new JLabel(Utils.BUNDLE.getString("prompt.select.location")));
 			jPanel.add(installLocation = new JTextField());
 			jPanel.add(selectFolderButton = new JButton());
@@ -100,20 +161,7 @@ public abstract class Handler implements InstallerProgress {
 			selectFolderButton.addActionListener(e -> InstallerGui.selectInstallLocation(() -> installLocation.getText(), s -> installLocation.setText(s)));
 		});
 
-		setupPane2(pane, installerGui);
-
-		addRow(pane, jPanel -> {
-			jPanel.add(statusLabel = new JLabel());
-			statusLabel.setText(Utils.BUNDLE.getString("prompt.loading.versions"));
-		});
-
-		addRow(pane, jPanel -> {
-			jPanel.add(buttonInstall = new JButton(Utils.BUNDLE.getString("prompt.install")));
-			buttonInstall.addActionListener(e -> {
-				buttonInstall.setEnabled(false);
-				install();
-			});
-		});
+		setupSidedOptions(extraOptions, installerGui);
 
 		Main.LOADER_META.onComplete(versions -> {
 			int stableIndex = -1;
@@ -132,15 +180,12 @@ public abstract class Handler implements InstallerProgress {
 			statusLabel.setText(Utils.BUNDLE.getString("prompt.ready.install"));
 		});
 
-		return pane;
+		return extraOptions;
 	}
 
 	private void updateGameVersions() {
 		gameVersionComboBox.removeAllItems();
 		for (MetaHandler.GameVersion version : Main.GAME_VERSION_META.getVersions()) {
-			if (!snapshotCheckBox.isSelected() && !version.isStable()) {
-				continue;
-			}
 			gameVersionComboBox.addItem(version.getVersion());
 		}
 		gameVersionComboBox.setSelectedIndex(0);
@@ -184,11 +229,15 @@ public abstract class Handler implements InstallerProgress {
 				errorMessage,
 				Utils.BUNDLE.getString("prompt.exception.occurrence"),
 				JOptionPane.ERROR_MESSAGE
-		);
+				);
 	}
 
 	protected void addRow(Container parent, Consumer<JPanel> consumer) {
-		JPanel panel = new JPanel(new FlowLayout());
+		this.addRow(parent, consumer, new FlowLayout());
+	}
+
+	private void addRow(Container parent, Consumer<JPanel> consumer, LayoutManager layout) {
+		JPanel panel = new JPanel(layout);
 		consumer.accept(panel);
 		parent.add(panel);
 	}

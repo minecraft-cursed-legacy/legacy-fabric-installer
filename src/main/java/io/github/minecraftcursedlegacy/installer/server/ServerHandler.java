@@ -75,12 +75,7 @@ public class ServerHandler extends Handler {
 	}
 
 	@Override
-	public void setupPane1(JPanel pane, InstallerGui installerGui) {
-
-	}
-
-	@Override
-	public void setupPane2(JPanel pane, InstallerGui installerGui) {
+	public void setupSidedOptions(JPanel pane, InstallerGui installerGui) {
 		installLocation.setText(new File("").getAbsolutePath());
 	}
 

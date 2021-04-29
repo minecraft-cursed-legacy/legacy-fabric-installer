@@ -16,10 +16,7 @@
 
 package io.github.minecraftcursedlegacy.installer.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,6 +37,12 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
+import javax.imageio.ImageIO;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 public class Utils {
 
@@ -124,6 +127,14 @@ public class Utils {
 	public static MinecraftLaunchJson getLaunchMeta(String loaderVersion) throws IOException {
 		JsonObject installMeta = Utils.GSON.fromJson(new InputStreamReader(Utils.class.getClassLoader().getResourceAsStream("launchmeta.json")), JsonObject.class);
 		return new MinecraftLaunchJson(installMeta);
+	}
+
+	public static InputStream load(String location) {
+		return Utils.class.getClassLoader().getResourceAsStream(location);
+	}
+
+	public static BufferedImage getNestedImage(String location) throws IOException {
+		return ImageIO.read(load(location));
 	}
 
 	public static String getProfileIcon() {

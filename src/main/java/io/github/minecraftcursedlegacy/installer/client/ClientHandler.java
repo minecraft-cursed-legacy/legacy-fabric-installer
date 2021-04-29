@@ -84,12 +84,7 @@ public class ClientHandler extends Handler {
 	}
 
 	@Override
-	public void setupPane1(JPanel pane, InstallerGui installerGui) {
-
-	}
-
-	@Override
-	public void setupPane2(JPanel pane, InstallerGui installerGui) {
+	public void setupSidedOptions(JPanel pane, InstallerGui installerGui) {
 		addRow(pane, jPanel -> jPanel.add(createProfile = new JCheckBox(Utils.BUNDLE.getString("option.create.profile"), true)));
 
 		installLocation.setText(Utils.findDefaultInstallDir().getAbsolutePath());
