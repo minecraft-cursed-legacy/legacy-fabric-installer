@@ -28,6 +28,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import io.github.minecraftcursedlegacy.installer.InstallerGui;
+import io.github.minecraftcursedlegacy.installer.util.MetaHandler.GameVersion;
 import io.github.minecraftcursedlegacy.installer.util.Utils;
 import io.github.minecraftcursedlegacy.installer.util.data.VersionData;
 
@@ -71,7 +72,7 @@ public class ServerPostInstallDialog extends JDialog {
 	private ServerPostInstallDialog(ServerHandler handler) throws HeadlessException {
 		super(InstallerGui.instance, true);
 		this.serverHandler = handler;
-		this.minecraftVersion = (String) handler.gameVersionComboBox.getSelectedItem();
+		this.minecraftVersion = ((GameVersion) handler.gameVersionComboBox.getSelectedItem()).getVersion();
 		this.installDir = new File(handler.installLocation.getText());
 		this.minecraftJar = new File(installDir, minecraftVersion + ".jar");
 

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.github.minecraftcursedlegacy.installer.util.data.GithubCommit;
+
 public class HardcodedMetaHandler extends MetaHandler {
 
 	private final List<GameVersion> versions = new ArrayList<>();
@@ -32,6 +34,11 @@ public class HardcodedMetaHandler extends MetaHandler {
 		return Collections.unmodifiableList(versions);
 	}
 	
+	public HardcodedMetaHandler addVersion(GithubCommit version, boolean stable) {
+		versions.add(new GameVersion(version, stable));
+		return this;
+	}
+
 	public HardcodedMetaHandler addVersion(String version, boolean stable) {
 		versions.add(new GameVersion(version, stable));
 		return this;

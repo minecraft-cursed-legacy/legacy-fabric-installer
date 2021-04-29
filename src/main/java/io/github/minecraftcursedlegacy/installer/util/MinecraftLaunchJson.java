@@ -53,6 +53,9 @@ public class MinecraftLaunchJson {
 
 			arguments.game.add("--tweakClass");
 			arguments.game.add(clientTweaker);
+			
+			arguments.game.add("--assetDir");
+			arguments.game.add("${game_assets}");
 		}
 
 		String[] validSides = new String[]{"common", "server"};

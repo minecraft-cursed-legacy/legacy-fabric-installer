@@ -24,6 +24,7 @@ import io.github.minecraftcursedlegacy.installer.util.ArgumentParser;
 import io.github.minecraftcursedlegacy.installer.util.InstallerProgress;
 import io.github.minecraftcursedlegacy.installer.util.LauncherMeta;
 import io.github.minecraftcursedlegacy.installer.util.Utils;
+import io.github.minecraftcursedlegacy.installer.util.MetaHandler.GameVersion;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,8 +39,8 @@ public class ServerHandler extends Handler {
 
 	@Override
 	public void install() {
-		String gameVersion = (String) gameVersionComboBox.getSelectedItem();
-		String loaderVersion = (String) loaderVersionComboBox.getSelectedItem();
+		String gameVersion = ((GameVersion) gameVersionComboBox.getSelectedItem()).getVersion();
+		String loaderVersion = ((GameVersion) loaderVersionComboBox.getSelectedItem()).getVersion();
 		new Thread(() -> {
 			try {
 				ServerInstaller.install(new File(installLocation.getText()), loaderVersion, gameVersion, this);

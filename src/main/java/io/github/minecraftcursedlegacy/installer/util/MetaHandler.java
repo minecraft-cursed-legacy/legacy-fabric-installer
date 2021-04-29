@@ -18,6 +18,8 @@ package io.github.minecraftcursedlegacy.installer.util;
 
 import com.google.gson.reflect.TypeToken;
 
+import io.github.minecraftcursedlegacy.installer.util.data.GithubCommit;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -65,11 +67,20 @@ public class MetaHandler extends CompletableHandler<List<MetaHandler.GameVersion
 
 	public static class GameVersion {
 		String version;
+		String display;
 		boolean stable;
 		
 		GameVersion() { }
+
 		GameVersion(String version, boolean stable) {
 			this.version = version;
+			this.display = version;
+			this.stable = stable;
+		}
+
+		GameVersion(GithubCommit version, boolean stable) {
+			this.version = version.sha.substring(0, 7);
+			this.display = version.commit.author.date.substring(0, 10) + " [" + this.version + "]";
 			this.stable = stable;
 		}
 
@@ -77,8 +88,17 @@ public class MetaHandler extends CompletableHandler<List<MetaHandler.GameVersion
 			return version;
 		}
 
+		public String getDisplayVersion() {
+			return display;
+		}
+
 		public boolean isStable() {
 			return stable;
+		}
+		
+		@Override
+		public String toString() {
+			return this.getDisplayVersion();
 		}
 	}
 

@@ -23,8 +23,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.LayoutManager;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -42,14 +40,15 @@ import javax.swing.UIManager;
 import io.github.minecraftcursedlegacy.installer.util.ArgumentParser;
 import io.github.minecraftcursedlegacy.installer.util.InstallerProgress;
 import io.github.minecraftcursedlegacy.installer.util.MetaHandler;
+import io.github.minecraftcursedlegacy.installer.util.MetaHandler.GameVersion;
 import io.github.minecraftcursedlegacy.installer.util.Utils;
 
 public abstract class Handler implements InstallerProgress {
 
 	public JButton buttonInstall;
 
-	public JComboBox<String> gameVersionComboBox;
-	public JComboBox<String> loaderVersionComboBox;
+	public JComboBox<GameVersion> gameVersionComboBox;
+	public JComboBox<GameVersion> loaderVersionComboBox;
 	public JTextField installLocation;
 	public JButton selectFolderButton;
 	public JLabel statusLabel;
@@ -166,7 +165,7 @@ public abstract class Handler implements InstallerProgress {
 			int stableIndex = -1;
 			for (int i = 0; i < versions.size(); i++) {
 				MetaHandler.GameVersion version = versions.get(i);
-				loaderVersionComboBox.addItem(version.getVersion());
+				loaderVersionComboBox.addItem(version);
 				if(version.isStable()){
 					stableIndex = i;
 				}
@@ -185,7 +184,7 @@ public abstract class Handler implements InstallerProgress {
 	private void updateGameVersions() {
 		gameVersionComboBox.removeAllItems();
 		for (MetaHandler.GameVersion version : Main.GAME_VERSION_META.getVersions()) {
-			gameVersionComboBox.addItem(version.getVersion());
+			gameVersionComboBox.addItem(version);
 		}
 		gameVersionComboBox.setSelectedIndex(0);
 	}

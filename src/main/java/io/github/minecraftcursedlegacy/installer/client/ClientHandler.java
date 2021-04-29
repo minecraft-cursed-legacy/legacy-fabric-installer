@@ -16,6 +16,10 @@
 
 package io.github.minecraftcursedlegacy.installer.client;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.MessageFormat;
+
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
@@ -23,11 +27,8 @@ import io.github.minecraftcursedlegacy.installer.Handler;
 import io.github.minecraftcursedlegacy.installer.InstallerGui;
 import io.github.minecraftcursedlegacy.installer.util.ArgumentParser;
 import io.github.minecraftcursedlegacy.installer.util.InstallerProgress;
+import io.github.minecraftcursedlegacy.installer.util.MetaHandler.GameVersion;
 import io.github.minecraftcursedlegacy.installer.util.Utils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.text.MessageFormat;
 
 public class ClientHandler extends Handler {
 
@@ -40,8 +41,8 @@ public class ClientHandler extends Handler {
 
 	@Override
 	public void install() {
-		String gameVersion = (String) gameVersionComboBox.getSelectedItem();
-		String loaderVersion = (String) loaderVersionComboBox.getSelectedItem();
+		String gameVersion = ((GameVersion) gameVersionComboBox.getSelectedItem()).getVersion();
+		String loaderVersion = ((GameVersion) loaderVersionComboBox.getSelectedItem()).getVersion();
 		System.out.println("Installing");
 		new Thread(() -> {
 			try {
