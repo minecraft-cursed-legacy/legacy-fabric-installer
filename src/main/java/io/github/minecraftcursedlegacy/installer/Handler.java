@@ -22,6 +22,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -108,7 +109,7 @@ public abstract class Handler implements InstallerProgress {
 			jPanel.add(centre, BorderLayout.CENTER);
 
 			try {
-				JButton button = new JButton("", new ImageIcon(Utils.getNestedImage("options.png")));
+				JButton button = new JButton(new ImageIcon(Utils.getNestedImage("options.png").getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 				button.setOpaque(false);
 				button.setContentAreaFilled(false);
 				button.setBorderPainted(false);
