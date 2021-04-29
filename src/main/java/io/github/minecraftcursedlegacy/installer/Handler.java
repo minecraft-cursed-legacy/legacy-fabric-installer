@@ -97,7 +97,7 @@ public abstract class Handler implements InstallerProgress {
 
 		addRow(pane, jPanel -> {
 			JPanel centre = new JPanel(new FlowLayout());
-			jPanel.setPreferredSize(new Dimension(500, 35));
+			jPanel.setPreferredSize(new Dimension(525, 35));
 
 			centre.add(gameVersionComboBox = new JComboBox<>());
 			centre.add(buttonInstall = new JButton(Utils.BUNDLE.getString("prompt.install")));
@@ -130,7 +130,7 @@ public abstract class Handler implements InstallerProgress {
 			}
 		}, new BorderLayout());
 
-		extraOptions.setPreferredSize(new Dimension(500, 100));
+		extraOptions.setPreferredSize(new Dimension(525, 100));
 		pane.add(extraOptions);
 
 		return pane;
