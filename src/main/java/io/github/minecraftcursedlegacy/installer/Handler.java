@@ -109,6 +109,7 @@ public abstract class Handler implements InstallerProgress {
 			jPanel.add(centre, BorderLayout.CENTER);
 
 			try {
+				// Choco and I pushed this exact same fix lmao
 				JButton button = new JButton("", new ImageIcon(
 						Utils.getNestedImage("options.png").getScaledInstance(30, 30, Image.SCALE_SMOOTH)
 						));
