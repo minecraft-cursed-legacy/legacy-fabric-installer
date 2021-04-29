@@ -46,7 +46,6 @@ dependencies {
 
 shadowJar {
 	relocate 'com.google', 'io.github.minecraftcursedlegacy.installer.repackage.com.google'
-	relocate 'com.formdev.flatlaf', 'io.github.minecraftcursedlegacy.installer.repackage.com.formdev.flatlaf'
 	minimize()
 	classifier = null
 }

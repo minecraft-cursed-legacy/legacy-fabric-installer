@@ -56,7 +56,7 @@ public class MinecraftLaunchJson {
 		}
 
 		arguments.game.add("--assetsDir");
-		arguments.game.add("${game_assets}");
+		arguments.game.add("${assets_root}");
 		
 		// Because mojang args handling is bad
 		arguments.jvm.add("-cp");
