@@ -90,6 +90,10 @@ public abstract class Handler implements InstallerProgress {
 			statusLabel.setText(Utils.BUNDLE.getString("prompt.loading.versions"));
 		});
 
+		// Initialise here so button can access it
+		JPanel extraOptions = makeExtraOptionsPanel(installerGui);
+		extraOptions.setVisible(false);
+
 		addRow(pane, jPanel -> {
 			JPanel centre = new JPanel(new FlowLayout());
 
@@ -108,6 +112,11 @@ public abstract class Handler implements InstallerProgress {
 				button.setContentAreaFilled(false);
 				button.setBorderPainted(false);
 				button.setPreferredSize(new java.awt.Dimension(30, 30));
+				
+				button.addActionListener(e -> {
+					extraOptions.setVisible(!extraOptions.isVisible());
+					installerGui.revalidate();
+				});
 
 				jPanel.add(button, BorderLayout.EAST);
 				button.setAlignmentX(SwingConstants.RIGHT);
@@ -115,8 +124,6 @@ public abstract class Handler implements InstallerProgress {
 				e.printStackTrace();
 			}
 		}, new BorderLayout());
-
-		JPanel extraOptions = makeExtraOptionsPanel(installerGui);
 
 		pane.add(extraOptions);
 
