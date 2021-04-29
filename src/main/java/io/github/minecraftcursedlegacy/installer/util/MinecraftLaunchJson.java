@@ -55,7 +55,7 @@ public class MinecraftLaunchJson {
 			arguments.game.add(clientTweaker);
 		}
 
-		arguments.game.add("--assetDir");
+		arguments.game.add("--assetsDir");
 		arguments.game.add("${game_assets}");
 		
 		// Because mojang args handling is bad

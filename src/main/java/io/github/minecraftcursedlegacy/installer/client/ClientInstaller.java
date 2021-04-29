@@ -37,7 +37,6 @@ public class ClientInstaller {
 
 		//Adds loader and the mappings
 		launchJson.libraries.add(new MinecraftLaunchJson.Library("com.github.minecraft-cursed-legacy:Plasma:build.9", Reference.mavenServerUrl));
-		launchJson.libraries.add(new MinecraftLaunchJson.Library("tk.valoeghese:ZoesteriaConfig:1.3.4", Reference.modmussServerUrl));
 		launchJson.libraries.add(new MinecraftLaunchJson.Library(Reference.PACKAGE.replaceAll("/", ".") + ":" + Reference.LOADER_NAME + ":" + loaderVersion, Reference.mavenServerUrl));
 
 		File versionsDir = new File(mcDir, "versions");

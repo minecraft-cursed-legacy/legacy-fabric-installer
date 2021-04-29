@@ -71,7 +71,6 @@ public class ServerInstaller {
 
 		//We add fabric-loader as a lib so it can be downloaded and loaded in the same way as the other libs
 		meta.libraries.add(new MinecraftLaunchJson.Library("com.github.minecraft-cursed-legacy:Plasma:build.9", Reference.mavenServerUrl));
-		meta.libraries.add(new MinecraftLaunchJson.Library("tk.valoeghese:ZoesteriaConfig:1.3.4", Reference.modmussServerUrl));
 		meta.libraries.add(new MinecraftLaunchJson.Library(Reference.PACKAGE.replaceAll("/", ".") + ":" + Reference.LOADER_NAME + ":" + loaderVersion, Reference.mavenServerUrl));
 
 		List<File> libraryFiles = new ArrayList<>();
