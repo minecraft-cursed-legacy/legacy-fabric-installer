@@ -91,13 +91,6 @@ public abstract class Handler implements InstallerProgress {
 		});
 
 		addRow(pane, jPanel -> {
-			GridBagConstraints constraints = new GridBagConstraints();
-			constraints.fill = GridBagConstraints.NONE;
-			constraints.gridx = 1;
-			constraints.gridy = 0;
-			constraints.weightx = 0;
-			constraints.ipadx = -40;
-
 			JPanel centre = new JPanel(new FlowLayout());
 
 			centre.add(gameVersionComboBox = new JComboBox<>());
@@ -106,9 +99,8 @@ public abstract class Handler implements InstallerProgress {
 				buttonInstall.setEnabled(false);
 				install();
 			});
-			buttonInstall.setSize(buttonInstall.getWidth(), buttonInstall.getHeight() * 5);
 
-			jPanel.add(centre, constraints);
+			jPanel.add(centre, BorderLayout.CENTER);
 
 			try {
 				JButton button = new JButton("", new ImageIcon(Utils.getNestedImage("options.png")));
@@ -117,19 +109,12 @@ public abstract class Handler implements InstallerProgress {
 				button.setBorderPainted(false);
 				button.setPreferredSize(new java.awt.Dimension(30, 30));
 
-				constraints.fill = GridBagConstraints.NONE;
-				constraints.gridx = 2;
-				constraints.weightx = 1.0;
-				constraints.gridy = 0;
-				constraints.ipadx = 0;
-				constraints.anchor = GridBagConstraints.LINE_END;
-
-				jPanel.add(button, constraints);
+				jPanel.add(button, BorderLayout.EAST);
 				button.setAlignmentX(SwingConstants.RIGHT);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}, new GridBagLayout());
+		}, new BorderLayout());
 
 		JPanel extraOptions = makeExtraOptionsPanel(installerGui);
 
